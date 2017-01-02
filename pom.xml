@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.blocko</groupId>
+	<artifactId>coinstack-openkeychain-sample</artifactId>
+	<version>1.0.0</version>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.blocko</groupId>
+			<artifactId>coinstack</artifactId>
+			<version>3.0.23</version>
+		</dependency>
+		<dependency>
+			<groupId>io.blocko</groupId>
+			<artifactId>coinstack-openkeychain</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+</project>
