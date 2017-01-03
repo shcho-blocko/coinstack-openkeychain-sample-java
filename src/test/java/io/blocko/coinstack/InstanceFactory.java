@@ -8,7 +8,7 @@ import io.blocko.coinstack.model.CredentialsProvider;
 import io.blocko.coinstack.openkeychain.InMemoryKeyManager;
 import io.blocko.coinstack.openkeychain.KeyManager;
 
-public class InstanceManager {
+public class InstanceFactory {
 	
 	public static CoinStackClient createNewCoinStackClient() {
 		CoinStackClient coinstack = new CoinStackClient(new CredentialsProvider() {

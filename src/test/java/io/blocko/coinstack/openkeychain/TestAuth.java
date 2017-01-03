@@ -8,7 +8,7 @@ import org.junit.*;
 
 import io.blocko.apache.commons.codec.binary.Base64;
 import io.blocko.coinstack.CoinStackClient;
-import io.blocko.coinstack.InstanceManager;
+import io.blocko.coinstack.InstanceFactory;
 import io.blocko.coinstack.ECKey;
 import io.blocko.coinstack.exception.CoinStackException;
 import io.blocko.coinstack.openkeychain.KeyManager;
@@ -44,14 +44,14 @@ public class TestAuth {
 	@Before
 	public void before() throws Exception {
 		// [server]
-		coinstack = InstanceManager.createNewCoinStackClient();
-		keyManager = InstanceManager.createNewKeyManager(SERVER_PRIVATE_KEY, SERVER_AUTHORITY_ADDRESS);
+		coinstack = InstanceFactory.createNewCoinStackClient();
+		keyManager = InstanceFactory.createNewKeyManager(SERVER_PRIVATE_KEY, SERVER_AUTHORITY_ADDRESS);
 		System.out.println("[server] authAddress="+keyManager.fetchAddress());
 		
 		// [client]
 		String clientPrivateKey = loadClientKeyForTest();
-		clientCoinStack = InstanceManager.createNewCoinStackClient();
-		clientKeyManager = InstanceManager.createNewKeyManager(clientPrivateKey);
+		clientCoinStack = InstanceFactory.createNewCoinStackClient();
+		clientKeyManager = InstanceFactory.createNewKeyManager(clientPrivateKey);
 		System.out.println("[client] authAddress="+clientKeyManager.fetchAddress()+" / privateKey="+clientPrivateKey);
 	}
 	
