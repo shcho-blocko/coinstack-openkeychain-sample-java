@@ -1,8 +1,9 @@
 package io.blocko.coinstack;
 
+import java.security.PublicKey;
+
 import io.blocko.coinstack.CoinStackClient;
 import io.blocko.coinstack.ECKey;
-import io.blocko.coinstack.Endpoint;
 import io.blocko.coinstack.exception.CoinStackException;
 import io.blocko.coinstack.model.CredentialsProvider;
 import io.blocko.coinstack.openkeychain.InMemoryKeyManager;
@@ -11,16 +12,22 @@ import io.blocko.coinstack.openkeychain.KeyManager;
 public class InstanceFactory {
 	
 	public static CoinStackClient createNewCoinStackClient() {
-		CoinStackClient coinstack = new CoinStackClient(new CredentialsProvider() {
+		CredentialsProvider credential = null;
+		AbstractEndpoint TESTCHAIN = new AbstractEndpoint() {
 			@Override
-			public String getAccessKey() {
-				return "17155ccf15e603853c19a35559f3f5"; // coinstack api key: "coinstack-sample-java"
+			public String endpoint() {
+				return "http://testchain.blocko.io";
 			}
 			@Override
-			public String getSecretKey() {
-				return "4ffe022576916bf0d9c4c13718d582";
+			public boolean mainnet() {
+				return true;
 			}
-		}, Endpoint.MAINNET);
+			@Override
+			public PublicKey getPublicKey() {
+				return null;
+			}
+		};
+		CoinStackClient coinstack = new CoinStackClient(credential, TESTCHAIN);
 		return coinstack;
 	}
 	
@@ -31,6 +38,7 @@ public class InstanceFactory {
 	public static KeyManager createNewKeyManager(String privateKey, String authAddress) throws CoinStackException {
 		KeyManager keyManager = new InMemoryKeyManager();
 		keyManager.registerKey(authAddress, privateKey.toCharArray());
+		keyManager.registerAllAddress(new String[] { authAddress });
 		return keyManager;
 	}
 }

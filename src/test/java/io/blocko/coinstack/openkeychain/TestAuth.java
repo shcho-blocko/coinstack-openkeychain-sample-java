@@ -3,6 +3,10 @@ package io.blocko.coinstack.openkeychain;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.*;
 
@@ -23,15 +27,22 @@ import io.blocko.coinstack.openkeychain.server.RegistrationManager;
 public class TestAuth {
 	
 	public static String generateRandomContextString() {
-		return ECKey.createNewPrivateKey();
+		return new SecureRandom().nextInt(100)+ECKey.createNewPrivateKey();
 	}
 	public static String loadClientKeyForTest() {
-		//return ECKey.createNewPrivateKey();
-		return "KwdANrBRPcX1DwDHK2M3FwZzJeS6o2CncDJar5Fby23es2f6TRoG"; // addr=1DXnc2fX9S1N7HmJgawGcWsF8WXxbspZnB (registed)
+		
+		// - generate new
+		return ECKey.createNewPrivateKey();
+		
+		// - registed sample
+		//return "Kx6ExvJJa6UTVEJLXvc4BuKkWbaBPVyQNMGcexK5YdfPCmebqU4d"; // addr=19AZ6Yfkuqq79bsPi9gN7543Y5xFshLneA (registed)
+		
+		// - revoked sample
+		//return "Ky2D8zen9aAHeNt4WhBMBk283eg3wEgeSNFM5jM1bzbLSQtKPJyb"; //addr=19Z7EHWieQJxZ6to6Eg7TvPvuuV4uKgWQi (revoked)
 	}
 	
-    private static final String SERVER_PRIVATE_KEY = ""; // SECRET: private key for test
-    private static final String SERVER_AUTHORITY_ADDRESS = "1LNerxk3A4KDtoXMtYXLfL3LRnhjvwkC55";
+    private static final String SERVER_PRIVATE_KEY = "L3mTMTnrvBS5S4Fn7PFWWSFrDipQA1NNEyHLdTQcEpv4Lo1m5zHA"; // SECRET: private key for test
+    private static final String SERVER_AUTHORITY_ADDRESS = "1DT3Hah1qimqcQwqXSf5QXZp1Uk8fZsSwt";
 	
 	
 	private CoinStackClient coinstack = null;
@@ -104,13 +115,16 @@ public class TestAuth {
 		
 		
 		// [server] record
-		//testRegistration(response.getCertificate()); // use BTC
+		testRegistration(response.getCertificate()); // use BTC
 		
 		// [server] check
-		testSignin(CLIENT_AUTH_ADDRESS, response.getCertificate());
+		//testSignin(CLIENT_AUTH_ADDRESS, response.getCertificate());
 		
 		// [server] revoke
 		//testRevocation(CLIENT_AUTH_ADDRESS, response.getCertificate()); // use BTC
+		
+		// [server] check
+		//testSignin(CLIENT_AUTH_ADDRESS, response.getCertificate());
 	}
 	
 	public void testRegistration(String certificateAddress) throws IOException {
@@ -118,7 +132,9 @@ public class TestAuth {
 		RegistrationMetadata metadata = new RegistrationMetadata() {
 			@Override
 			public byte[] marshal() {
-				return "METADATA".getBytes();
+				Date today = Calendar.getInstance().getTime();
+				String metadata = new SimpleDateFormat("yyyyMMdd").format(today);
+				return metadata.getBytes();
 			}
 		};
 		System.out.println("[server] registration metadata: "+new String(metadata.marshal()));

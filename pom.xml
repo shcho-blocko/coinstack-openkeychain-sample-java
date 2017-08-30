@@ -25,12 +25,14 @@
 		<dependency>
 			<groupId>io.blocko</groupId>
 			<artifactId>coinstack</artifactId>
-			<version>3.0.23</version>
+			<version>3.0.25</version>
 		</dependency>
 		<dependency>
 			<groupId>io.blocko</groupId>
 			<artifactId>coinstack-openkeychain</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../coinstack-openkeychain-1.1.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
