@@ -24,6 +24,7 @@ import io.blocko.coinstack.openkeychain.server.AuthorizationManager;
 import io.blocko.coinstack.openkeychain.server.ChallengeResponseManager;
 import io.blocko.coinstack.openkeychain.server.RegistrationManager;
 
+@Deprecated
 public class TestAuth {
 	
 	public static String generateRandomContextString() {
@@ -52,7 +53,7 @@ public class TestAuth {
 	private KeyManager clientKeyManager = null;
 	
 	
-	@Before
+	@Deprecated // @Before
 	public void before() throws Exception {
 		// [server]
 		coinstack = InstanceFactory.createNewCoinStackClient();
@@ -67,7 +68,7 @@ public class TestAuth {
 	}
 	
 	
-	@Test
+	@Deprecated // @Test
 	public void testMain() throws Exception {
 		// [server] prepare regManager
 		String SERVER_AUTH_ADDRESS = keyManager.fetchAddress();
