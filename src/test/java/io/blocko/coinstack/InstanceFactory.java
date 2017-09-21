@@ -9,6 +9,7 @@ import io.blocko.coinstack.model.CredentialsProvider;
 import io.blocko.coinstack.openkeychain.InMemoryKeyManager;
 import io.blocko.coinstack.openkeychain.KeyManager;
 
+@Deprecated
 public class InstanceFactory {
 	
 	public static CoinStackClient createNewCoinStackClient() {
