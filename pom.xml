@@ -3,6 +3,18 @@
 	<groupId>io.blocko</groupId>
 	<artifactId>coinstack-openkeychain-sample</artifactId>
 	<version>1.0.0</version>
+	
+	<repositories>
+		<repository>
+			<id>in-project-repository</id>
+			<url>file://${project.basedir}/lib/</url>
+			<!--
+				${project.basedir}/lib/
+				- io/blocko/coinstack-openkeychain/1.1.0/coinstack-openkeychain-1.1.0.jar
+			-->
+		</repository>
+	</repositories>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -15,6 +27,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -31,8 +44,6 @@
 			<groupId>io.blocko</groupId>
 			<artifactId>coinstack-openkeychain</artifactId>
 			<version>1.1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/../coinstack-openkeychain-1.1.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
